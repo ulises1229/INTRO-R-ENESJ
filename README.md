@@ -48,10 +48,16 @@ Efectos fijos vs aleatorios
 Efectos anidados vs cruzados 
 Selección de modelos
 Visualización y validación de modelos mixtos
-| Día        | Temas           | Cool  |
-| ------------- |:-------------:| -----:|
-| Día 1      | right-aligned | $1600 |
-| col 2      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
+
+
+| Día        | Temas           | Contenido  |  Material   |
+| ------------- |:-------------:         | -----:| -----:|
+| Día 1      | Introducción al lenguaje R| * Objetos R * Disposición de las ventanas de R Studio * Funciones básicas (importación y exportación de datos, revisión y descripción de datos, gráficas XY, gráficas caja y bigote, histogramas, media, desviación estándar) |   |
+| Día 2      | Estadística descriptiva  |  |    |
+| Día 3      | Manejo y análisis de datos |  |   |
+| Día 4      | Gráficas usando la librería ggplot2 |  |   |
+| Día 5      | Modelos de efectos mixtos y aplicaciones |  |     |
+
+
 
 
