@@ -1,37 +1,26 @@
-## Welcome to GitHub Pages
+# CURSO-TALLER: INTROODUCCIÓN A R
 
-You can use the [editor on GitHub](https://github.com/ulises1229/INTRO-R-ENESJ/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+![alt text](figs/header.png)
+![alt text](figs/r.png)
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+## Fecha
+### 17 - 21 de Agosto de 2020 
 
-### Markdown
+## Impartido por:
+<ul>
+  <li> Dr. Alberto Prado Farías</li>
+  <li> Dr. Ulises Olivares Pinto</li>
+</ul>
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+## Temario y Materiales
 
-```markdown
-Syntax highlighted code block
+| Día        | Tema           | Contenido  |  Material   |
+| :------------- |:-------------:|:-----| :-----|
+| Día 1      | Introducción al lenguaje R| <ul> <li> Objetos R</li> <li> Disposición de las ventanas de R Studio</li> <li> Funciones básicas (importación y exportación de datos, revisión y descripción de datos, gráficas XY, gráficas caja y bigote, histogramas, media, desviación estándar)</li> </ul>|  <ul><li> [Presentación](pdf/día1.pdf)</li> <li>[Código](code/dia1.R)</li></ul> |
+| Día 2      | Estadística descriptiva  | <ul> <li> Más gráficas descriptivas </li>  <li> Cleveland Plot </li> <li> Histogramas y distribuciones probabilísticas </li> <li> Agregar colores y formas a las gráficas </li> <li> Más funciones básicas de estadística descriptiva (regresiones lineales, correlaciones) </li> <li> T Test </li></ul> |  <ul><li></li> <li></li></ul>  |
+| Día 3      | Manejo y análisis de datos | <ul> <li> Importación de librerías </li> <li> Manejo de datos </li> <li> Aglomerar, separar, transformar o re-acomodar datos con respecto algunas variables </li> <li> Ejercicios usando funciones de la familia “apply” </li> <li> Ejercicios usando funciones “ddply”</li></ul>|  <ul><li></li> <li></li></ul>  |
+| Día 4      | Gráficas usando la librería ggplot2 | <ul>  <li> Gráficos de dispersión</li> <li> Estéticas</li> <li> Facetas</li> <li> grids</li> <li> Gráficos de línea</li> <li> Boxplots</li> <li> Transformaciones estadísticas</li> <li> Histogramas </li><li> Más Geometrías</li> <li> Exportación de gráficos</li></ul>| <ul><li></li> <li></li></ul>  |
+| Día 5      | Modelos de efectos mixtos y aplicaciones | <ul> <li> Efectos fijos vs aleatorios</li> <li> Efectos anidados vs cruzados </li> <li> Selección de modelos</li> <li> Visualización y validación de modelos mixtos</li> </ul> |  <ul><li></li> <li></li></ul>   |
 
-# Header 1
-## Header 2
-### Header 3
 
-- Bulleted
-- List
 
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/ulises1229/INTRO-R-ENESJ/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
