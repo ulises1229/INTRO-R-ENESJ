@@ -84,31 +84,6 @@ suma <- function(x,y){
 }
 suma(1.23,3.45)
 
-#### Solución a ejercicios en casa
-
-mult_raiz <-  function(x,y){
-  resultado <- sqrt(x)*sqrt(y)
-  return(resultado)
-}
-mult_raiz(1,2)
-
-prom <- function(vec){
-  resultado <- mean(vec)
-  return(resultado)
-}
-
-prom(X)
-Z <- c(10,11,12,13,14,14)
-prom(Z)
-
-log_mas_1 <- function(vec){
-  res <- log(vec+1)
-  return(res)
-  }
-
-W <- c(0,1,2,3,4)
-log_mas_1(W)
-
 
 ###############################################################
 ##############################################################
@@ -168,6 +143,10 @@ boxplot(iris$L.sepalo)
 boxplot(iris$Long.sepalo~iris$Especie)
 
 ## Mas sobre la indexación 
+## Podemos seleccionar secciones de nuestro data frame usando operadores relacionales
+## "==" igual a
+## ">" mayor a
+## "|" OR
 iris[iris$Especie=="setosa",]
 
 setosa <- iris[iris$Especie=="setosa",]
@@ -179,46 +158,7 @@ hist(iris[iris$Especie=="setosa",]$Long.sepalo)
 ## agregar columna 
 iris$col.nueva <- c(1,2,3,4)
 
-## Solución a ejercicio en casa
-
-iris2 <- iris[iris$A.sepalo>=2.5,]
-plot(y=iris2$L.petalo, x=iris2$L.sepalo, col=iris$Especie, 
-     main= "Mi gráfica", xlab="Longitud del sepalo (cm)", ylab="Longitud del pétalo (cm)")
-
-
 #################################
 ## Ejercicio: Wage data set
 
 Wage <- read.csv("Wage.csv")
-Wage <- Wage[,-1]
-
-Wage2 <- Wage[Wage$wage<280,]
-plot(Wage$wage~Wage$age, col=Wage$education, xlab="Edad",ylab="Salario (dolares/semana)")
-
-
-plot(Wage$wage~Wage$race, xlab="Grupo étnico",ylab="Salario (dolares/semana)")
-boxplot(Wage$wage~Wage$education, xlab="Nivel de educación",ylab="Salario (dolares/semana)")
-
-
-#### Solución al último ejercicio
-## Lo primero es cambiar la variable nivel de educación a numérico
-Wage$edu.num <- as.numeric(Wage$education)
-
-# Función para corregir el salario
-# e es el nivel de educación
-# s el salario
-sal_cor <- function(e,s){
-  sc <- s - ((e-1)*16.33)
-  return(sc)
-}
-
-## Verificar que funciona como esperamos
-edu <- c(2,1,4,5,1)
-sal <- c(300,400,500,400,500)
-sal_cor(edu,sal)
-
-# Corregir salario usando nuestra función 
-Wage$sal.cor <- sal_cor(Wage$edu.num,Wage$wage)
-
-# Al corregir por nivel de educación no vemos un efecto por grupo étnico
-plot(Wage$sal.cor~Wage$race, xlab="Grupo étnico",ylab="Salario (dolares/semana)")
