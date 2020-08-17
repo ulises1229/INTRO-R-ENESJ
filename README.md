@@ -22,5 +22,9 @@
 | Día 4      | Gráficas usando la librería ggplot2 | <ul>  <li> Gráficos de dispersión</li> <li> Estéticas</li> <li> Facetas</li> <li> grids</li> <li> Gráficos de línea</li> <li> Boxplots</li> <li> Transformaciones estadísticas</li> <li> Histogramas </li><li> Más Geometrías</li> <li> Exportación de gráficos</li></ul>| <ul><li></li> <li></li></ul>  |
 | Día 5      | Modelos de efectos mixtos y aplicaciones | <ul> <li> Efectos fijos vs aleatorios</li> <li> Efectos anidados vs cruzados </li> <li> Selección de modelos</li> <li> Visualización y validación de modelos mixtos</li> </ul> |  <ul><li></li> <li></li></ul>   |
 
+## Sesiones Grabadas
+ <ul>
+    <li>[Día1](https://youtu.be/RXyrCbZbnBg)</li>
+</ul>
 
 
