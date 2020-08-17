@@ -1,7 +1,7 @@
 # CURSO-TALLER: INTROODUCCIÓN A R
 
-![alt text](figs/header.png)
-![alt text](figs/r.png)
+![alt text](https://github.com/ulises1229/INTRO-R-ENESJ/blob/master/figs/header.png)
+![alt text](https://github.com/ulises1229/INTRO-R-ENESJ/blob/master/figs/r.png)
 
 ## Fecha
 ### 17 - 21 de Agosto de 2020 
