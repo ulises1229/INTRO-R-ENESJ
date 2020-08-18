@@ -12,7 +12,7 @@
   <li> Dr. Ulises Olivares Pinto</li>
 </ul>
 
-## Temario y Materiales
+## Temario, materiales y videos
 
 | Día        | Tema           | Contenido  |  Material   | Videos | 
 | :------------- |:-------------:|:-----| :-----|:-----: |
