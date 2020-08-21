@@ -1,265 +1,232 @@
-# -----------------------------
-# Author Ulises Olivares Pinto
-# ENES Unidad Juriquilla
+# Autor: Ulises Olivares
 # uolivares@unam.mx
-# -----------------------------
+# 20 Agosto de 2020
 
-# Importar librería ggplot2
+#install.packages("ggplot2")
+
+# ruta IMAC 
+setwd("/Volumes/OneDrive/OneDrive - UNAM/0. UNAM - Juriquilla/0. MATERIAS ENESJ/2. Cursos intersemestrales/2021-1/Módulo 1. Introducción a R/Presentaciones/1_Ulises/Día 4")
+
 library(ggplot2)
 
-#install package 
-#install.packages('dplyr')
-library(dplyr)
+consumo <- read.csv("mpg.csv")
 
-# Limpiar ambiente de R (memoria RAM) 
-rm(list=ls())
+str(consumo)
 
-consumo <- mpg
-
-# Detalles sobre el dataframe
-?mpg
-
-# Estadísticos sencillos del data frame
-summary(consumo)
-
-## Generar sistema de coordenadas 
-ggplot(data = consumo)
-
-# Número de filas y columas del data frame
-nrow(consumo)
-ncol(consumo)
-
-
-
-########################################
-# Gráficos de dispersión
-########################################
-
-# Generar un gráfico de dispersión sencillo desplazamiento vs rendimiento en autopista
-ggplot(data = consumo, aes(x = desp, y = autop )) +
+# Generar un diagrama de dispersión
+ggplot(data = consumo, aes(x = displ, y = hwy)) +
   geom_point()
 
-#########################################
-# Estéticas
-########################################
-    
-    ggplot(data = consumo, aes(x = desp, y = autop, color = clase)) +
-      geom_point()
-    
-    # Tamaño
-    ggplot(data = consumo, aes(x = desp, y = autop, size = clase)) +
-      geom_point()
-    
-    # Transparencia
-    ggplot(data = consumo, aes(x = desp, y = autop, alpha = clase)) +
-      geom_point()
-    
-    # Formas
-    ggplot(data = consumo, aes(x = desp, y = autop, shape = clase)) +
-      geom_point()
-    
-    # Un solo color
-    ggplot(data = consumo, aes(x = desp, y = autop)) +
-      geom_point(color = "blue")
-    
-    # ##############
+# Representación equivalente
+ggplot(data = consumo ) + 
+  geom_point(aes(x = displ, y = hwy))
 
-#######################################
-# Facetas
-######################################
+# Renombrar variables
+names(consumo) <-  c("num","fabricante", "modelo", "desp", "año", 
+                     "cil", "trans", "trac", "ciudad", "autop", "comb", "clase")
 
-# Facetas con dos filas 
-ggplot(data = consumo) + 
-      geom_point(aes(x= desp, y= autop))+
-      facet_wrap(~ clase, nrow = 2)
-    
-# Grids cil ~ trac
-   ggplot(data = consumo) + 
-      geom_point(aes(x= desp, y= autop))+
-      facet_grid(cil ~ trac)
-# Grids con un solo dato
-  ggplot(data = consumo) + 
-      geom_point(aes(x= desp, y= autop))+
-      facet_grid(. ~ cil)
-  
-    
-# 4- Gráfico con títulos
-plot1 <- ggplot(data = consumo) + 
-  geom_point(mapping = aes(x = displ, y = hwy, color=class))+
-  labs(
-    x = "Desplazamiento",              # título del eje x
-    y = "Rendimiento autopista",   # t??tulo del eje y
-    title = "Desplazamiento vs Rendimiento en autopista",   # t??tulo principal de la figura
-    color = "Clase de automovil"   # t??tulo de la leyenda
-    )+  
-  theme(axis.text.x=element_blank(), axis.ticks.x=element_blank(), plot.title = element_text(hjust = 0.5))
-ggsave(filename = "consumo.png", plot = plot1, width = 16, height = 9, dpi = 300, units = "cm")
+# desp vs autop
+ggplot(data = consumo, aes(x = desp, y = ciudad)) +
+  geom_point()
 
-milage <- consumo
+# Cilindros vs autopista
+ggplot(data = consumo, aes(x = cil, y = autop)) +
+  geom_point()
 
-# Anotaciones en gráfico
-best_in_class <- consumo 
-  group_by(milage$class) 
-  filter(row_number(desc(milage$hwy)) == 1)
-  
-  ggplot(consumo, aes(displ, hwy)) +
-  geom_point(aes(colour = class)) +
-    geom_text(aes(label = model), data = best_in_class)
-  
-ggplot(data = consumo) + 
-  geom_point(mapping = aes(x = cyl, y = hwy))
+# Fabricante vs mpg autopista
+ggplot(data = consumo, aes(x = fabricante, y = autop)) +
+  geom_point()
 
-ggplot(data = consumo) + 
-  geom_point(mapping = aes(x = year, y = hwy))
+# Clase vs transmisión
+ggplot(data = consumo, aes(x = clase, y = trans)) +
+  geom_point()
 
-ggplot(data = consumo) + 
-  geom_point(mapping = aes(x = displ, y = hwy))
+# Agregar una estética (color) con títulos
+ggplot(data = consumo, aes(x = desp, y = autop, colour = clase)) + 
+  geom_point() + 
+  labs(x = "Desplazamiento (lts)", y = "Rendimiento en autopista (mpg)", title = 
+         "Desplazamiento vs Autopista")
 
-ggplot(data = consumo) + 
-  geom_point(mapping = aes(x = displ, y = hwy, color = "blue"))
+# utilizando dos estéticas
+ggplot(data = consumo, aes(x = desp, y = autop, size = autop, colour = clase))+
+  geom_point()+
+  labs(x = "Desplazamiento (lts)", y = "Rendimiento en autopista (mpg)", 
+       title = "Desplazamiento vs Autopista")
 
-ggplot(data = consumo) + 
-  geom_point(mapping = aes(x = displ, y = hwy, color = class, size = cyl))
+# Utilizando estética alpha
+ggplot(data = consumo, aes(x = desp, y = autop, alpha = desp))+
+geom_point()+
+  labs(x = "Desplazamiento (lts)", y = "Rendimiento en autopista (mpg)", 
+       title = "Desplazamiento vs Autopista")
 
+# Utilizando estética forma 
+ggplot(data = consumo, aes(x = desp, y = autop, shape = clase))+
+  geom_point()+
+  labs(x = "Desplazamiento (lts)", y = "Rendimiento en autopista (mpg)", 
+       title = "Desplazamiento vs Autopista")
 
-?geom_point
+# Asignar una estética a todo el gráfico
+ggplot(data = consumo, aes(x = desp, y = autop))+
+  geom_point(size = 1)+
+  labs(x = "Desplazamiento (lts)", y = "Rendimiento en autopista (mpg)", 
+       title = "Desplazamiento vs Autopista")
 
+# Asiganar una condición a una estética
+ggplot(data = consumo, aes(x = desp, y = autop, color = desp<=5))+
+  geom_point()+
+  labs(x = "Desplazamiento (lts)", y = "Rendimiento en autopista (mpg)", 
+       title = "Desplazamiento vs Autopista")
 
-ggplot(data = consumo) + 
-  geom_point(mapping = aes(x = drv, y = cyl))
+# Agregar dos nuevas columnas al df en km/lt
+consumo$km_autop <- consumo$autop / 2.352
+consumo$km_ciudad <-  consumo$ciudad / 2.352
 
-ggplot(data = consumo) + 
-  geom_point(mapping = aes(x = displ, y = hwy)) +
-  facet_grid(drv ~ .)
+# Gráfico Desplazamiento vs km/lt autopista
+ggplot(data = consumo, aes(x = desp, y = km_autop))+
+  geom_point()
 
-ggplot(data = consumo) + 
-  geom_point(mapping = aes(x = displ, y = hwy)) +
-  facet_grid(. ~ cyl)
+# Gráfico Desplazamiento vs km/lt ciudad
+ggplot(data = consumo, aes(x = desp, y = km_ciudad))+
+  geom_point()
 
-ggplot(data = consumo) + 
-  geom_point(mapping = aes(x = displ, y = hwy)) + 
-  facet_wrap(~ class, nrow = 2)
+# Agregando facetas al gráfico
+ggplot(data = consumo, aes(x = desp, y = km_ciudad, color = clase))+
+  geom_point() + 
+  facet_wrap(~ clase, nrow = 2) 
 
-ggplot(consumo, aes(displ, hwy), color=consumo$class) +
+# Utilizando grids en el gráfico
+ggplot(data = consumo, aes(x = desp, y = km_ciudad, color = clase))+
   geom_point() +
-  geom_smooth(method = "lm")
-  
+  facet_grid(cil ~ trac)
 
-?geom_smooth
-?mehtod
-?surveys_complete
-  
+# importar data frame iris
+iris2 <- read.csv("iris.csv")
 
-?diamonds
+names(iris2) <- c("X", "long_sep", "ancho_sep", "long_pet", "ancho_pet", "Especie")
 
-diamonds <- diamonds  
-
-?geom_bar
-
-ggplot(data = diamonds) + 
-  geom_bar(
-    mapping = aes(x = cut, fill = cut), 
-    show.legend = FALSE,
-    width = 1
-  ) + 
-  theme(aspect.ratio = 1) +
-  labs(x = NULL, y = NULL)
-
-diamonds <- diamonds
-
-ggplot(data = diamonds) + 
-  geom_histogram(aes(x = price , fill = cut )) +
-  labs(x = "Precio", y = "Número de elementos")
-
-casos <- as_tibble(read.csv("casos.csv"))
-
-covid <- as_tibble(read.csv("covid19.csv"))
-
-top5 <- covid %>% filter(Country_code == "MX" | Country_code == "US" | Country_code == "BR" | Country_code == "ES" | Country_code == "FR")
-
-top5$Date_reported <-  as.Date(top5$Date_reported)
-
-ggplot(data=top5) + 
-  geom_line(aes(x= Date_reported, y = Cumulative_cases, color = Country))+
-  labs(x = "Fecha", y = "Casos Acumulados", title = "Casos acumulados por país")
-  
-
-
-bar + coord_flip()
-bar + coord_polar()
-
-
-ggplot(data = consumo) +
-  geom_line(aes(x = clase, y= ciudad))
-
-
-########################
-## Gráficos de línea
-########################
-
-################################
-# Temperatura media de la tierra
-################################
-setwd("/Volumes/OneDrive/OneDrive - UNAM/0. UNAM - Juriquilla/0. MATERIAS ENESJ/2. Cursos intersemestrales/2021-1/Módulo 1. Introducción a R/Presentaciones/1_Ulises/Día 4")
-temp <- read.csv("temp_anual.csv")
-
-names(temp) <- c("Fuente", "Año", "Media")
-
-# Gráfico de línea
-ggplot(data=temp) +
-  geom_line(aes(x = Año, y=Media, color = Fuente))
-  
-# Agregar títulos y uso de facetas
-ggplot(data=temp) +
-  geom_line(aes(x = Año, y=Media, color = Fuente))+
-    geom_point(aes(x = Año, y=Media, color = Fuente))+
-  labs(title = "Temperatura media de 1980 a 2016", x = "Año", y = ("Temperatura media en ºC")) +
-  facet_wrap(temp$Fuente)
-
-#################
-# Regresiones
-#################
-
-# Regresión lineal
-ggplot (data=consumo, aes(x = desplazamiento, y = autopista))+
+# Generar gráfico longitud sépalo vs longitud pétalo
+ggplot(data = iris2, aes(x = long_sep, y=long_pet, color = Especie))+
   geom_point()+
+  facet_grid(.~Especie)
+
+# importar datos de temperatura
+temp <- read.csv("temp.csv")
+
+# traducir nombres
+names(temp ) <- c("Fuente", "Año", "avg")
+
+str(temp)
+
+#gráfico de línea
+ggplot(data = temp, aes(x = Año, y = avg, color = Fuente))+
+  geom_line()+
+  geom_point()+
+  facet_grid(Fuente~.)
+
+# Regresión líneal
+ggplot(data = consumo, aes(x = desp, y = autop))+
+  geom_point() + 
   geom_smooth(method = "lm")
-  
+
 # Regresión polinomial
-ggplot (data=consumo, aes(x = desplazamiento, y = autopista))+
-  geom_point()+
+ggplot(data = consumo, aes(x = desp, y = autop))+
+  geom_point() + 
   geom_smooth()
-  
 
-#########################################
-# 3.3 Boxplots
-########################################
-ggplot(data=consumo, aes(x =clase, y=autopista, , fill= clase))+
-  geom_boxplot()
 
-# Boxplot extras geom_jitter
-ggplot(data=consumo, aes(x =clase, y=autopista, , fill= clase))+
+# agragar estéticas a  geom_smoth()
+ggplot(data = consumo, aes(x = desp, y = autop, ))+
+  geom_point(aes(color = clase)) + 
+  geom_smooth()
+
+# Consultar ayuda de geom_smoth
+?geom_smooth
+
+# Combinar estéticas y facetas con gráficos de dispersión, línea y tendencia. 
+ggplot(data = consumo, aes(x = desp, y = autop, color = clase))+
+  geom_point() + 
+  geom_smooth() + 
+  facet_wrap(~clase)
+
+# Generación de boxplot
+ggplot(data = consumo, aes(x = clase, y = autop, fill = clase))+
   geom_boxplot(notch = TRUE)+
-  geom_jitter(aes(color = clase), alpha= 0.8)
+  geom_jitter(aes(color = clase), alpha = 0.5)+
+  stat_summary(fun.y=mean, geom="point", shape=20, size=3, color="red", fill="red")
 
+# Empleando la librería tidyverse para hacer un filtrado de datos
+install.packages("tidyverse")
 
-?geom_boxplot()
-
-# demonstrate usage of tidyverse 
-#install.packages(tidyverse)
+#  cargar libraría
 library(tidyverse)
 
-data <- as_tibble(consumo)
+# Convertir un data frame (df) a un tibble.
+consumo2 <- as_tibble(consumo)
 
-str(data)
+# generar un nuevo df pickup 
+pickup <- consumo2 %>% filter(consumo2$clase == "pickup")
 
-pickup <- data %>% filter(consumo$clase == "pickup")
+# Graficar la función de densidad de probabilidad de pickup$autop
+plot(density(pickup$autop))
 
-plot(density(pickup$autopista))
+# Generar un nuevo df para automóviles compactos
+compactos <- consumo2 %>% filter(consumo2$clase == "compact")
+
+# Generar un boxplot por marca vs rendimiento en autopista
+ggplot(data = compactos, aes(x = fabricante, y= autop, fill = fabricante))+ 
+  geom_boxplot(notch = TRUE)+ 
+  geom_jitter(aes(color = fabricante), alpha = 0.5)+
+  coord_flip()
+
+# Importar datos de covid-19 
+covid <- read.csv("https://raw.githubusercontent.com/ulises1229/INTRO-R-ENESJ/master/datos/covid19.csv")
+
+# Transformar a tibble
+covid2 <- as_tibble(covid)
+
+str(covid2)
+
+# Generar un nuevo df con los registros de México
+mexico <- covid2 %>% filter(covid2$Country == "Mexico")
+
+# Convertir fecha a formato de fecha
+mexico$Date_reported <- as.Date(mexico$Date_reported)
+
+# Revisar estructura
+str(mexico)
+
+# Generar un gráfico de línea
+ggplot(mexico, aes(x = Date_reported, y = Cumulative_cases, color = Country))+
+  geom_line()
+
+# Generar un conjunto de datos para México, USA, Brasil, Francia y España
+top5 <- covid2 %>% filter(covid2$Country == "Mexico" | 
+                            covid2$Country == "Brazil" |
+                            covid2$Country == "France" |
+                            covid2$Country == "United States of America" |
+                            covid2$Country == "Spain")
+
+# Convertir a formato de fecha
+top5$Date_reported <-  as.Date(top5$Date_reported)
+
+# Generar un gráfico de línea para el top5
+ggplot(data = top5, aes(x = Date_reported, y = Cumulative_cases, color = Country))+
+  geom_line()
+
+#########################
+# Diagramas de barra
+
+diamantes <- read.csv("https://raw.githubusercontent.com/ulises1229/INTRO-R-ENESJ/master/datos/diamonds.csv")
+
+# Importar df
+diamantes <- diamonds
+
+# Diagrama de barras
+ggplot(diamantes, aes(x = cut, fill = clarity))+
+  geom_bar()+
+  coord_flip()
 
 
-
-compactos <- data %>% filter(consumo$clase == "compact")
 
 
 
