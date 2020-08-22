@@ -1,7 +1,7 @@
 # Autor: Ulises Olivares
 # uolivares@unam.mx
 # 21 de agosto de 2020
-# Modelos líneales mixtos
+# Modelos lineales mixtos
 
 # Leer datos desde URL
 d = read.csv("http://www.bodowinter.com/uploads/1/2/9/3/129362560/politeness_data.csv")
