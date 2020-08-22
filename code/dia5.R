@@ -14,8 +14,10 @@ names(d) <- c("sujeto", "género", "escenario", "situación", "tono")
 # Desplegar un resumen
 table(d$sujeto, d$situación)
 
+# Cargar librería ggplot2
 library(ggplot2)
 
+# Generar un boxplot
 ggplot(data = d, aes(x = situación, y = tono, color = sujeto))+
   geom_boxplot()+
   facet_wrap(~sujeto, nrow=1)
