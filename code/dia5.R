@@ -1,39 +1,51 @@
 # Autor: Ulises Olivares
 # uolivares@unam.mx
 # 21 de agosto de 2020
-# Modelos líneales mixtos
 
-# Leer datos desde URL
-d = read.csv("http://www.bodowinter.com/uploads/1/2/9/3/129362560/politeness_data.csv")
 
-str(d)
+# Descargar el set de datos 
+sueño <- read.csv("https://raw.githubusercontent.com/ulises1229/INTRO-R-ENESJ/master/datos/sleep.csv")
 
-# Renombrar dataframe
-names(d) <- c("sujeto", "género", "escenario", "situación", "tono")
+# Transformar Subject a factor
+sueño$Subject <- as.factor(sueño$Subject)
 
-# Desplegar un resumen
-table(d$sujeto, d$situación)
+# Revisar estructura de sueño
+str(sueño)
 
-library(ggplot2)
+## Generar un diagrama de dispersión de los datos de sueño
+ggplot(sueño, aes(x = Days, y = Reaction, color = Subject))+
+  geom_point()+
+  geom_smooth(method= "lm")+
+  facet_wrap(~Subject)
 
-ggplot(data = d, aes(x = situación, y = tono, color = sujeto))+
-  geom_boxplot()+
-  facet_wrap(~sujeto, nrow=1)
+# Ayuda de geom_smooth
+?geom_smooth
 
-library (lmerTest) # Mixed model package by Douglas Bates, comes w/ pvalues! 
-library (texreg) #Helps us make tables of the mixed models
-library (afex) # Easy ANOVA package to compare model fits
-library (plyr) # Data manipulator package
-library (ggplot2) # GGplot package for visualizing data
-library (lme4)
+# Importar librería nlme
+library(nlme)
+via <- Rail
 
-gpa_mixed = lmer(gpa ~ occasion + (1|student), data=gpa)
+#Exportar csv
+write.csv(via, "rail.csv")
 
-sleepstudy <- sleepstudy
+# Generar gráfico de dispersión
+ggplot(via, aes(x = Rail, y = travel, color = Rail))+
+  geom_point()
 
-write.csv(sleepstudy, "sleep.csv")
+# Generar modelo lineal de via
+railLm <- lm(travel~Rail, data=via)
+summary(railLm)
 
-data <- pizzadata
+# Importar librería lattice
+library(lattice)
 
-load('data/gpa.RData')
+# Desplegar variación entre datos
+with(via,bwplot(Rail~residuals(railLm)))
 
+# importar librería lme4 para Modelos mixtos
+library(lme4)
+# Generar modelo mixto
+modeloMixto <-lmer(travel ~ 1 + (1|Rail), REML = FALSE, data = via)
+
+# Revisión de estadísticos
+summary(modeloMixto)
