@@ -25,3 +25,5 @@
 ##### Última actualización: 21 de agosto de 2020
 
 
+GNU GENERAL PUBLIC LICENSE
+Version 3, 29 June 2007
